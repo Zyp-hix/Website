@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Biolink | Zyphix">
     <link href="./css.css" rel="stylesheet">
@@ -129,7 +129,11 @@
                         <div class="link-content">
                             <h4>Coming soon</h4>
                             <a href="Comingsoon" target="_blank">
-                                View Link
+                                <div class="tooltip" data-text="View Link">
+                                    <svg width="20px" height="20px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                        <path stroke="#d8d8d8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 3h7v7M27.5 4.5L20 12M17 5H8a3 3 0 00-3 3v16a3 3 0 003 3h16a3 3 0 003-3v-9"></path>
+                                    </svg>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -138,7 +142,11 @@
                         <div class="link-content">
                             <h4>Discord</h4>
                             <a href="https://discord.gg/jPGc3YfjDW" target="_blank">
-                                View Link
+                                <div class="tooltip" data-text="View Link">
+                                    <svg width="20px" height="20px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                        <path stroke="#d8d8d8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 3h7v7M27.5 4.5L20 12M17 5H8a3 3 0 00-3 3v16a3 3 0 003 3h16a3 3 0 003-3v-9"></path>
+                                    </svg>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -159,19 +167,57 @@
     </audio>
 
     <script>
-        const audio = document.getElementById("background-music");
-        const audioControl = document.getElementById("audio-control");
-        const playIcon = document.getElementById("play-icon");
-        const pauseIcon = document.getElementById("pause-icon");
-        const overlay = document.getElementById("overlay");
+        // Typewriter Effect
+        var txt = 'Anti Ratter | Programmer';
+        var speed = 70;
+        var eraseSpeed = 80;
+        var forward = true;
 
-        // Play music on overlay click
+        function typeWriter() {
+            var typewriter = document.getElementById("typewriter");
+            if (!typewriter) return;
+
+            if (forward) {
+                if (typewriter.innerHTML.length < txt.length) {
+                    typewriter.innerHTML += txt.charAt(typewriter.innerHTML.length);
+                    setTimeout(typeWriter, speed);
+                } else {
+                    forward = false;
+                    setTimeout(typeWriter, speed * 3);
+                }
+            } else {
+                if (typewriter.innerHTML.length > 0) {
+                    typewriter.innerHTML = typewriter.innerHTML.slice(0, -1);
+                    setTimeout(typeWriter, eraseSpeed);
+                } else {
+                    forward = true;
+                    setTimeout(typeWriter, speed * 3);
+                }
+            }
+        }
+
+        // Page Load Actions
+        window.onload = function() {
+            // Start Typewriter
+            typeWriter();
+
+            // Show Overlay
+            document.getElementById('overlay').classList.remove('hidden');
+        };
+
+        // Music Overlay Click
+        const overlay = document.getElementById("overlay");
+        const audio = document.getElementById("background-music");
         overlay.addEventListener("click", () => {
             overlay.classList.add("hidden");
             audio.play();
         });
 
-        // Toggle play/pause functionality
+        // Audio Control
+        const audioControl = document.getElementById("audio-control");
+        const playIcon = document.getElementById("play-icon");
+        const pauseIcon = document.getElementById("pause-icon");
+
         audioControl.addEventListener("click", () => {
             if (audio.paused) {
                 audio.play();
@@ -183,22 +229,6 @@
                 pauseIcon.style.display = "none";
             }
         });
-
-        // Typewriter effect
-        const txt = 'Anti Ratter | Programmer';
-        let i = 0;
-        const typewriter = document.getElementById("typewriter");
-        function typeEffect() {
-            if (i < txt.length) {
-                typewriter.innerHTML += txt.charAt(i);
-                i++;
-                setTimeout(typeEffect, 100);
-            }
-        }
-        window.onload = function() {
-            overlay.classList.remove("hidden");
-            typeEffect();
-        };
     </script>
 </body>
 </html>
