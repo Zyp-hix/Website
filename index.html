@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/avatars/1256555669985824799/45c1b714f769eeefa6effa0f7a145dcc.png?size=1024">
     <title>Zyphix.biolink</title>
     <style>
+        /* General Styles */
         #overlay {
             position: fixed;
             top: 0;
@@ -61,10 +62,14 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+            margin: 0;
+            padding: 0;
         }
 
         .profile-container {
             text-align: center;
+            width: 90%;
+            max-width: 600px;
         }
 
         .pfp img {
@@ -97,6 +102,41 @@
         .links .link {
             margin: 10px 0;
             color: white;
+        }
+
+        /* Responsive Design for Mobile Devices */
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column;
+                padding: 20px;
+                height: auto;
+            }
+
+            .pfp img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .username a {
+                font-size: 20px;
+            }
+
+            .status a {
+                font-size: 16px;
+            }
+
+            .badges-container img {
+                width: 18px;
+                height: 19px;
+            }
+
+            .links-container {
+                margin-top: 15px;
+            }
+
+            .links .link {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
